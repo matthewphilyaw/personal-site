@@ -1,0 +1,137 @@
+<bio-page>
+
+  <div class="main-content">
+    <div class="split-bar">
+      <handle-component
+              class="no-rad-bar split-bar-largest"
+              hdir="right"
+              vdir="top"
+              header-text="Matthew Philyaw">
+      </handle-component>
+      <div class="bar__spacer ui__spacer ui__spacer-horizontal"></div>
+      <handle-component
+              class="no-rad-bar alt-color split-bar-smallest"
+              hdir="left"
+              vdir="top">
+      </handle-component>
+    </div>
+
+    <main>
+      <p>
+        I’m an enthusiastic and versatile software engineer who loves challenging problems. My professional career started
+        back in 2008 and since have worked on a very diverse and broad set of systems ranging from enterprise applications
+        to smaller resource constrained microcontrollers.
+      </p>
+    </main>
+  </div>
+
+  <div class="photo alt-color">
+    <div class="ui__expand">
+      <blade-component
+              hdir="left"
+              vdir="top">
+      </blade-component>
+      <div class="ui__spacer ui__spacer-vertical"></div>
+      <!--<img class="photo-img" src="/public/images/bio_image_800w.jpg">-->
+      <div class="scaneline-h"></div>
+      <div class="ui__spacer ui__spacer-vertical"></div>
+      <blade-component
+              class="smaller-blade"
+              hdir="left"
+              vdir="bottom">
+      </blade-component>
+    </div>
+  </div>
+
+  <style type="scss">
+    :host {
+      --thumbnail-width: 500px;
+      display: grid;
+      grid-template-columns: auto var(--thumbnail-width);
+      grid-template-areas: 'main-content photo';
+    }
+
+    main {
+      font-family: 'Roboto', sans-serif;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      font-size: 16pt;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    main p {
+      max-width: 55rem;
+    }
+
+    .bar__spacer {
+      height: var(--ui-handle-height);
+    }
+
+    .no-rad-bar {
+      --ui-handle-cap-rad: 0;
+    }
+
+    .main-content {
+      grid-area: main-content;
+    }
+
+    .split-bar {
+      display: flex;
+    }
+
+    .split-bar-largest {
+      flex: 0.8;
+    }
+
+    .split-bar-smallest {
+      flex: 0.2;
+    }
+
+    .photo {
+      grid-area: photo;
+      display: flex;
+    }
+
+    .photo-img {
+      width: 100%;
+    }
+
+    .scaneline-h {
+      background: repeating-linear-gradient(transparent, transparent 2px, #000000 3px, #000000 3px), url('/public/images/bio_image_800w.jpg');
+      background-size: cover;
+      height: 500px;
+      opacity: 1;
+    }
+
+    .alt-color {
+      --ui-primary-color: var(--mk-orange);
+    }
+
+    .smaller-blade {
+      --ui-blade-height: 1.5rem;
+    }
+
+  </style>
+
+  <script type="ts">
+    import {RiotComponentExport} from 'riot';
+    import BladeComponent from '../../../components/theme/blade-component.riot';
+    import HandleComponent from '../../../components/theme/handle-component.riot';
+
+
+    function build(): RiotComponentExport<never, never> {
+      return { };
+    }
+
+    build.components = {
+      BladeComponent,
+      HandleComponent
+    };
+
+    export default build;
+  </script>
+
+</bio-page>

@@ -1,0 +1,112 @@
+<main-app>
+
+  <div class="nav">
+    <blade-component
+            hdir="right"
+            vdir="top">
+    </blade-component>
+    <cmd-container
+            orientation="vertical"
+            commands={state.cmdItems}
+            active-menu-slug={state.activeMenuSlug}>
+    </cmd-container>
+    <blade-component
+            class="bottom-menu-cap"
+            hdir="right"
+            vdir="bottom">
+    </blade-component>
+  </div>
+  <div class="main-content">
+    <bio-page if={ state.activeMenuSlug === 'bio' }></bio-page>
+    <contact-page if={ state.activeMenuSlug === 'contact' }></contact-page>
+  </div>
+
+  <style type="scss">
+    :host {
+      display: grid;
+      grid-template-columns: 12em auto;
+      grid-template-areas: 'nav main';
+      margin: 1rem;
+    }
+
+
+    .nav {
+      grid-area: nav;
+
+    }
+
+    .main-content {
+      grid-area: main;
+    }
+
+    .bottom-menu-cap {
+      --ui-blade-height: 2rem;
+    }
+  </style>
+
+  <script type="ts">
+    import { RiotComponentExport } from 'riot';
+    import { CmdContainerItem } from '../../components/theme/cmd-container/cmd-container';
+
+    import BladeComponent from '../../components/theme/blade-component.riot';
+    import HandleComponent from '../../components/theme/handle-component.riot';
+    import CmdContainer from '../../components/theme/cmd-container/cmd-container.riot';
+    import BioPage from './components/bio-page.riot';
+    import ContactPage from './components/contact-page.riot';
+
+    const cmdItems: CmdContainerItem[] = [
+      {
+        name: 'BIO',
+        slug: 'bio',
+        cmdStyle: 'u1',
+        handler: () => {
+          window.location.href = '/';
+        },
+        active: false
+      },
+      {
+        name: 'Contact',
+        slug: 'contact',
+        cmdStyle: 'u2',
+        handler: () => {
+          window.location.href = '/contact';
+        },
+        active: false
+      }
+    ];
+
+    interface State {
+      pageTitle: string;
+      cmdItems: CmdContainerItem[];
+      activeMenuSlug: string;
+    }
+
+    interface Props {
+      activeMenuSlug: string;
+    }
+
+    interface MainApp extends RiotComponentExport<Props, State> {
+      state: State;
+    }
+
+    export function build(): MainApp {
+      return {
+        state: {
+          pageTitle: 'MainApp',
+          cmdItems: cmdItems,
+          activeMenuSlug: 'bio'
+        }
+      };
+    }
+
+    build.components = {
+      BladeComponent,
+      HandleComponent,
+      CmdContainer,
+      BioPage,
+      ContactPage
+    };
+
+    export default build;
+  </script>
+</main-app>

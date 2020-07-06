@@ -1,0 +1,113 @@
+<cmd-container>
+
+  <template if={ state.commands.length > 0 }>
+    <nav class="cmd__bar cmd__bar-{props.orientation}">
+      <div class="ui__spacer ui__spacer-{props.orientation}"></div>
+      <template each={ cmd in state.commands }>
+        <button
+          class="cmd__button { cmd.slug === props.activeMenuSlug ? 'cmd__button-active' : '' } cmd__button-{ props.orientation } cmd__button-{ props.orientation }-{ cmd.cmdStyle }"
+          onclick={ cmd.handler }>
+          { cmd.name }
+        </button>
+        <div class="ui__spacer ui__spacer-{props.orientation}"></div>
+      </template>
+    </nav>
+  </template>
+
+  <script type="ts">
+    import { RiotComponentExport } from 'riot';
+    import { CmdContainerItem } from './cmd-container';
+
+    interface State {
+      hasSlots: boolean;
+      commands: CmdContainerItem[];
+    }
+
+    interface Props {
+      orientation: 'vertical' | 'horizontal';
+      commands: CmdContainerItem[];
+      activeMenuSlug: string;
+    }
+
+    function build(): RiotComponentExport<Props, State> {
+      return {
+        state: {
+          hasSlots: false,
+          commands: []
+        },
+        onBeforeMount(props: Props) {
+          if (this.state) {
+            this.state.hasSlots = this.slots.length > 0;
+            this.state.commands = props.commands;
+          }
+        }
+      };
+    }
+
+    export default build;
+  </script>
+
+
+  <style type="scss">
+    :host {
+      display: block;
+    }
+
+    .cmd__bar {
+      display: flex;
+      justify-content: flex-start;
+
+      margin: var(--ui-cmd-bar-margin-top) var(--ui-cmd-bar-margin-right) var(--ui-cmd-bar-margin-bottom) var(--ui-cmd-bar-margin-left);
+    }
+
+    .cmd__bar-vertical {
+      flex-direction: column;
+
+    }
+
+    .cmd__bar-horizontal {
+      flex-direction: row;
+      height: var(--ui-cmd-bar-height);
+    }
+
+    .cmd__button {
+      background-color: var(--ui-primary-color);
+      color: var(--ui-on-primary-color);
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .cmd__button-horizontal {
+      font-size: calc(var(--ui-cmd-bar-height) * 0.75);
+      padding-left: calc(var(--ui-cmd-bar-height) * 0.25);
+      padding-right: calc(var(--ui-cmd-bar-height) * 0.25);
+      padding-bottom: calc(var(--ui-cmd-bar-height) * 0.1);
+    }
+
+    .cmd__button-vertical {
+      font-size: calc(var(--ui-cmd-bar-height) * 0.7);
+      width: 100%;
+    }
+
+    .cmd__button-vertical-u1 {
+      height: var(--ui-cmd-bar-height);
+    }
+
+    .cmd__button-vertical-u2 {
+      height: calc(var(--ui-cmd-bar-height) * 2);
+    }
+
+    .cmd__button-vertical-u3 {
+      height: calc(var(--ui-cmd-bar-height) * 3);
+    }
+
+    .cmd__button-active, .cmd__button:hover {
+      background-color: var(--ui-secondary-color);
+      color: var(--ui-on-secondary-color);
+      cursor: pointer;
+    }
+  </style>
+
+</cmd-container>

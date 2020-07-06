@@ -1,0 +1,72 @@
+<cmd-container-item>
+  <button
+    class="cmd__button { props.active ? 'cmd__button-active' : '' } cmd__button-{ props.orientation } cmd__button-{ props.orientation }-{ props.cmdStyle }"
+    onclick={ props.handler }>
+    { props.name }
+  </button>
+
+  <script type="ts">
+    import { RiotComponentExport } from 'riot';
+
+    interface Props {
+      orientation: 'vertical' | 'horizontal';
+      cmdStyle: 'u1' | 'u2' | 'u3';
+      name: string;
+      handler: () => void;
+      active: boolean;
+    }
+
+    function build(): RiotComponentExport<Props, never> {
+      return { };
+    }
+
+    export default build;
+  </script>
+
+
+  <style type="scss">
+    :host {
+      display: block;
+    }
+
+    .cmd__button {
+      background-color: var(--ui-primary-color);
+      color: var(--ui-on-primary-color);
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .cmd__button-horizontal {
+      font-size: calc(var(--ui-cmd-bar-height) * 0.75);
+      padding-left: calc(var(--ui-cmd-bar-height) * 0.25);
+      padding-right: calc(var(--ui-cmd-bar-height) * 0.25);
+      padding-bottom: calc(var(--ui-cmd-bar-height) * 0.1);
+    }
+
+    .cmd__button-vertical {
+      font-size: calc(var(--ui-cmd-bar-height) * 0.7);
+      width: 100%;
+    }
+
+    .cmd__button-vertical-u1 {
+      height: var(--ui-cmd-bar-height);
+    }
+
+    .cmd__button-vertical-u2 {
+      height: calc(var(--ui-cmd-bar-height) * 2);
+    }
+
+    .cmd__button-vertical-u3 {
+      height: calc(var(--ui-cmd-bar-height) * 3);
+    }
+
+    .cmd__button-active, .cmd__button:hover {
+      background-color: var(--ui-secondary-color);
+      color: var(--ui-on-secondary-color);
+      cursor: pointer;
+    }
+  </style>
+
+</cmd-container-item>

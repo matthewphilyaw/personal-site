@@ -1,0 +1,53 @@
+<contact-page>
+
+  <handle-component
+          hdir="right"
+          vdir="top">
+  </handle-component>
+
+  <header>
+    <h1>Contact Info</h1>
+  </header>
+
+  <p>Email: <a>matthew.philyaw@gmail.com</a> </p>
+
+  <script type="ts">
+    import {RiotComponentExport} from 'riot';
+    import BladeComponent from '../../../components/theme/blade-component.riot';
+    import HandleComponent from '../../../components/theme/handle-component.riot';
+
+
+    function build(): RiotComponentExport<never, never> {
+      return { };
+    }
+
+    build.components = {
+      BladeComponent,
+      HandleComponent
+    };
+
+    export default build;
+  </script>
+
+  <style type="scss">
+    :host {
+      display: block;
+      width: 55rem;
+    }
+
+    header {
+      display: flex;
+      justify-content: center;
+      font-weight: 800;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    main {
+      font-family: 'Roboto', sans-serif;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      font-size: 16pt;
+    }
+  </style>
+
+</contact-page>
