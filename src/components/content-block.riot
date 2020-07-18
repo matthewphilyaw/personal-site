@@ -1,0 +1,84 @@
+<content-block>
+
+  <div class="info-block info-block-{ props.hdir }">
+    <div class="info-gutter">
+      <div class="vert-title">{ props.title }</div>
+    </div>
+    <div class="info-content">
+      <slot />
+    </div>
+  </div>
+
+  <script type="ts">
+    import {RiotComponentExport} from 'riot';
+
+    interface Props {
+      title: string;
+      hdir: 'left' | 'right';
+    }
+
+    function build(): RiotComponentExport<Props> {
+      return { };
+    }
+
+    export default build;
+  </script>
+
+
+  <style type="scss">
+    :host {
+      display: block;
+    }
+
+    .info-block {
+      display: grid;
+    }
+
+    .info-block-left {
+      grid-template-columns: var(--ui-handle-height) auto;
+      grid-template-areas: 'gutter content';
+    }
+
+    .info-block-right {
+      grid-template-columns: auto var(--ui-handle-height);
+      grid-template-areas: 'content gutter';
+    }
+
+    .info-gutter {
+      grid-area: gutter;
+      background-color: var(--ui-primary-color);
+      display: flex;
+      flex: 1;
+      align-items: center;
+      border-radius: var(--ui-handle-cap-rad);
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 800;
+      font-size: calc(var(--ui-handle-height) * 1.2);
+      text-transform: uppercase;
+    }
+
+    .info-content {
+      grid-area: content;
+      font-family: 'Merriweather Sans', sans-serif;
+      margin: 0 1.5rem;
+    }
+
+    .info-content p {
+      margin: 1rem 0;
+    }
+
+    .vert-title {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      background-color: var(--ui-background-color);
+      color: var(--ui-on-background-color);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+  </style>
+
+</content-block>

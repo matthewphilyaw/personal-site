@@ -17,11 +17,51 @@
     </div>
 
     <main>
-      <p>
-        I’m an enthusiastic and versatile software engineer who loves challenging problems. My professional career started
-        back in 2008 and since have worked on a very diverse and broad set of systems ranging from enterprise applications
-        to smaller resource constrained microcontrollers.
-      </p>
+      <content-block
+        title="who"
+        hdir="left">
+        <p>
+          Can you guess my name? It feels a bit weird to lead with my name considering it is in the title and url for that matter.
+          Oh, I also enjoy heavy doses of sarcasm!
+        </p>
+
+        <p>
+          I'm terrible at introductions and exiting a conversation gracefully. Growing up I was a fairly shy
+          kid and really only nailed down having the middle part of conversations apparently.
+        </p>
+        <p>
+          Why am I telling you this? Easy! It explains the abrupt end to this section moving right into my background!
+        </p>
+      </content-block>
+      <content-block
+        title="background"
+        hdir="right">
+        <p>
+          I am an enthusiastic software engineer with a fairly diverse background. The projects I have worked on range from
+          enterprise applications down to small embedded projects.
+        </p>
+        <p>
+          My experience goes beyond writing code. I'm comfortable leading teams and directing the development from both
+          and architecture perspective as well as in supervising capacity.
+        </p>
+        <p>
+          I am a huge fan of strong communication and something I continually work at. It's critical that I'm able to
+          express what is in my head to other developers and perhaps more importantly to the business units and
+          often act as liaison between the two disciplines.
+        </p>
+      </content-block>
+      <content-block
+          title="For Fun"
+          hdir="left">
+        <p>
+          Programming also happens to be my hobby as well. I continually push the limits of what I know and eager to
+          learn.
+        </p>
+        <p>
+          Low level / system programming is typically what I tend to do in my spare time. Processors genuinely fascinate
+          me so I enjoy learning how they work and writing code on that level.
+        </p>
+      </content-block>
     </main>
   </div>
 
@@ -32,8 +72,10 @@
               vdir="top">
       </blade-component>
       <div class="ui__spacer ui__spacer-vertical"></div>
-      <!--<img class="photo-img" src="/public/images/bio_image_800w.jpg">-->
-      <div class="scaneline-h"></div>
+      <div class="img-container">
+        <img class="photo-img" src="/public/images/bio_image_800w.jpg">
+        <div class="scaneline-h"></div>
+      </div>
       <div class="ui__spacer ui__spacer-vertical"></div>
       <blade-component
               class="smaller-blade"
@@ -45,14 +87,14 @@
 
   <style type="scss">
     :host {
-      --thumbnail-width: 500px;
+      --thumbnail-width: 300px;
       display: grid;
       grid-template-columns: auto var(--thumbnail-width);
       grid-template-areas: 'main-content photo';
     }
 
     main {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Merriweather Sans', sans-serif;
       padding-left: 1rem;
       padding-right: 1rem;
       font-size: 16pt;
@@ -60,10 +102,14 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      --ui-handle-cap-rad: 0.3rem;
+      --ui-handle-height: 0.8rem;
+      --ui-primary-color: var(--mk-purple);
     }
 
-    main p {
-      max-width: 55rem;
+    main content-block {
+      margin-bottom: 2rem;
+      max-width: 75%;
     }
 
     .bar__spacer {
@@ -95,14 +141,21 @@
       display: flex;
     }
 
+    .img-container {
+      position: relative;
+    }
+
     .photo-img {
       width: 100%;
     }
 
-    .scaneline-h {
-      background: repeating-linear-gradient(transparent, transparent 2px, #000000 3px, #000000 3px), url('/public/images/bio_image_800w.jpg');
-      background-size: cover;
-      height: 500px;
+    .img-container .scaneline-h {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(transparent, transparent 2px, #000000 4px, #000000 2px);
       opacity: 1;
     }
 
@@ -120,6 +173,7 @@
     import {RiotComponentExport} from 'riot';
     import BladeComponent from '../../../components/theme/blade-component.riot';
     import HandleComponent from '../../../components/theme/handle-component.riot';
+    import ContentBlock from '../../../components/content-block.riot';
 
 
     function build(): RiotComponentExport<never, never> {
@@ -128,7 +182,8 @@
 
     build.components = {
       BladeComponent,
-      HandleComponent
+      HandleComponent,
+      ContentBlock
     };
 
     export default build;
